@@ -1,53 +1,21 @@
-import { ChevronLeft, ChevronRight, BarChart3, Lock, CheckCircle2, AlertCircle, Sparkles } from 'lucide-react';
+import { BarChart3, Lock, CheckCircle2, AlertCircle, Sparkles } from 'lucide-react';
 
 interface EnhancementsPanelProps {
-  isExpanded: boolean;
-  onToggle: () => void;
   questionCount: number;
 }
 
-export function EnhancementsPanel({ isExpanded, onToggle, questionCount }: EnhancementsPanelProps) {
+export function EnhancementsPanel({ questionCount }: EnhancementsPanelProps) {
   const qualityScore = Math.min(95, 70 + questionCount * 3);
   const toneScore = 88;
   const contentScore = 82;
 
   return (
-    <>
-      {isExpanded && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-40 z-40 transition-opacity duration-300"
-          onClick={onToggle}
-        />
-      )}
-      <div
-        className={`fixed right-0 top-0 h-full bg-white border-l border-gray-200 shadow-xl transition-all duration-300 ease-in-out z-50 ${
-          isExpanded ? 'w-80' : 'w-14'
-        }`}
-      >
-        {!isExpanded ? (
-          <button
-            onClick={onToggle}
-            className="absolute top-8 right-3.5 w-7 h-7 flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-gray-600 transition-colors"
-            aria-label="Expand enhancements panel"
-          >
-            <BarChart3 size={14} />
-            <ChevronLeft size={14} />
-          </button>
-        ) : (
-          <div className="h-full flex flex-col p-5 overflow-y-auto">
-            <div className="flex items-start justify-between mb-6">
-              <div className="flex items-center gap-2">
-                <BarChart3 className="text-blue-600" size={20} />
-                <h2 className="text-lg font-semibold text-gray-900">Enhancements</h2>
-              </div>
-              <button
-                onClick={onToggle}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
-                aria-label="Collapse enhancements panel"
-              >
-                <ChevronRight size={20} />
-              </button>
-            </div>
+    <div className="fixed right-0 top-0 h-full bg-white border-l border-gray-200 shadow-xl w-80 z-50">
+      <div className="h-full flex flex-col p-5 overflow-y-auto">
+        <div className="flex items-center gap-2 mb-6">
+          <BarChart3 className="text-blue-600" size={20} />
+          <h2 className="text-lg font-semibold text-gray-900">Enhancements</h2>
+        </div>
 
             <div className="space-y-4">
               <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200">
@@ -181,10 +149,8 @@ export function EnhancementsPanel({ isExpanded, onToggle, questionCount }: Enhan
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+        </div>
       </div>
-    </>
+    </div>
   );
 }

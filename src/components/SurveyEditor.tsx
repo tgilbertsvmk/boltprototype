@@ -17,7 +17,6 @@ interface SurveyEditorProps {
 export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, onRegenerateAll, initialExpanded = false }: SurveyEditorProps) {
   const [questions, setQuestions] = useState(initialQuestions);
   const [isWidgetExpanded, setIsWidgetExpanded] = useState(initialExpanded);
-  const [isEnhancementsExpanded, setIsEnhancementsExpanded] = useState(false);
   const [isDeploying, setIsDeploying] = useState(false);
 
   useEffect(() => {
@@ -79,11 +78,7 @@ export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, on
         onToggle={() => setIsWidgetExpanded(!isWidgetExpanded)}
       />
 
-      <EnhancementsPanel
-        isExpanded={isEnhancementsExpanded}
-        onToggle={() => setIsEnhancementsExpanded(!isEnhancementsExpanded)}
-        questionCount={questions.length}
-      />
+      <EnhancementsPanel questionCount={questions.length} />
 
       <div className="max-w-5xl mx-auto px-6 py-8 pl-20 pr-20">
           <div className="mb-10">
