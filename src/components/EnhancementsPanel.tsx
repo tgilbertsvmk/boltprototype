@@ -25,13 +25,6 @@ export function EnhancementsPanel({ questionCount }: EnhancementsPanelProps) {
 
   const suggestions: Suggestion[] = [
     {
-      id: 'bias-detection',
-      title: 'Remove leading language',
-      description: 'Questions 2 and 5 contain potentially biased language that could influence responses.',
-      isPremium: true,
-      explanation: 'Question 2 uses "amazing" which suggests a positive answer. Question 5 assumes prior knowledge without checking.',
-    },
-    {
       id: 'simplify-language',
       title: 'Simplify technical terms',
       description: 'Replace jargon with plain language for better understanding across all audiences.',
@@ -44,6 +37,13 @@ export function EnhancementsPanel({ questionCount }: EnhancementsPanelProps) {
       description: 'Question 3 is 28 words long. Shorter questions get better completion rates.',
       isPremium: false,
       explanation: 'Research shows questions over 20 words see a 15% drop in response quality. Question 3 could be split or condensed.',
+    },
+    {
+      id: 'bias-detection',
+      title: 'Remove leading language',
+      description: 'Questions 2 and 5 contain potentially biased language that could influence responses.',
+      isPremium: true,
+      explanation: 'Question 2 uses "amazing" which suggests a positive answer. Question 5 assumes prior knowledge without checking.',
     },
     {
       id: 'response-order',
