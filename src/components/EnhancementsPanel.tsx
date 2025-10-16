@@ -1,4 +1,4 @@
-import { CheckCircle2, Circle, HelpCircle, Wand2, Crown } from 'lucide-react';
+import { CheckCircle2, Circle, HelpCircle, Wand2, Crown, Users, TestTube, Target, Briefcase, MapPin, GraduationCap, Building2, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 
 interface EnhancementsPanelProps {
@@ -13,13 +13,95 @@ interface Suggestion {
   explanation: string;
 }
 
+interface ChecklistItem {
+  id: number;
+  icon: React.ElementType;
+  label: string;
+  description: string;
+  completed: boolean;
+  color: string;
+}
+
+interface ProfileField {
+  id: string;
+  icon: React.ElementType;
+  label: string;
+  value: string;
+  placeholder: string;
+  color: string;
+}
+
 export function EnhancementsPanel({ questionCount }: EnhancementsPanelProps) {
   const [hoveredSuggestion, setHoveredSuggestion] = useState<string | null>(null);
 
-  const checklistItems = [
-    { id: 1, label: 'Add a question', completed: questionCount > 0 },
-    { id: 2, label: 'Set up your survey audience', completed: false },
-    { id: 3, label: 'Take a test survey', completed: false },
+  const surveyChecklistItems: ChecklistItem[] = [
+    {
+      id: 1,
+      icon: Sparkles,
+      label: 'Add a question',
+      description: 'Create at least one question',
+      completed: questionCount > 0,
+      color: 'text-blue-600 bg-blue-50'
+    },
+    {
+      id: 2,
+      icon: Target,
+      label: 'Define your audience',
+      description: 'Who should take this survey?',
+      completed: false,
+      color: 'text-green-600 bg-green-50'
+    },
+    {
+      id: 3,
+      icon: TestTube,
+      label: 'Test your survey',
+      description: 'Try it yourself before sharing',
+      completed: false,
+      color: 'text-orange-600 bg-orange-50'
+    },
+  ];
+
+  const profileFields: ProfileField[] = [
+    {
+      id: 'role',
+      icon: Briefcase,
+      label: 'Role',
+      value: '',
+      placeholder: 'e.g., Product Manager',
+      color: 'text-slate-600 bg-slate-50'
+    },
+    {
+      id: 'industry',
+      icon: Building2,
+      label: 'Industry',
+      value: '',
+      placeholder: 'e.g., Technology',
+      color: 'text-cyan-600 bg-cyan-50'
+    },
+    {
+      id: 'company-size',
+      icon: Users,
+      label: 'Company Size',
+      value: '',
+      placeholder: 'e.g., 50-200 employees',
+      color: 'text-emerald-600 bg-emerald-50'
+    },
+    {
+      id: 'location',
+      icon: MapPin,
+      label: 'Location',
+      value: '',
+      placeholder: 'e.g., San Francisco, CA',
+      color: 'text-rose-600 bg-rose-50'
+    },
+    {
+      id: 'education',
+      icon: GraduationCap,
+      label: 'Education',
+      value: '',
+      placeholder: 'e.g., Bachelor\'s Degree',
+      color: 'text-amber-600 bg-amber-50'
+    },
   ];
 
   const suggestions: Suggestion[] = [
@@ -54,30 +136,87 @@ export function EnhancementsPanel({ questionCount }: EnhancementsPanelProps) {
   ];
 
   return (
-    <div className="h-full bg-gray-50 border-l border-gray-200">
+    <div className="h-full bg-gradient-to-br from-gray-50 to-gray-100 border-l border-gray-200">
       <div className="h-full flex flex-col p-8 overflow-y-auto">
+        {/* This Survey Section */}
         <div className="mb-8">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Before you send</h2>
-          <div className="space-y-2">
-            {checklistItems.map((item) => (
-              <div key={item.id} className="flex items-center gap-3">
-                {item.completed ? (
-                  <CheckCircle2 className="text-green-600 shrink-0" size={18} />
-                ) : (
-                  <Circle className="text-gray-300 shrink-0" size={18} />
-                )}
-                <span
-                  className={`text-sm ${
-                    item.completed ? 'text-gray-900 line-through' : 'text-gray-700'
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-1.5 h-6 bg-blue-600 rounded-full"></div>
+            <h2 className="text-lg font-bold text-gray-900">This Survey</h2>
+          </div>
+          <div className="space-y-3">
+            {surveyChecklistItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.id}
+                  className={`bg-white rounded-lg p-4 border-2 transition-all ${
+                    item.completed
+                      ? 'border-green-200 bg-green-50/30'
+                      : 'border-gray-200 hover:border-gray-300'
                   }`}
                 >
-                  {item.label}
-                </span>
-              </div>
-            ))}
+                  <div className="flex items-start gap-3">
+                    <div className={`${item.color} rounded-lg p-2 shrink-0`}>
+                      <Icon size={20} strokeWidth={2} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`text-sm font-semibold ${
+                          item.completed ? 'text-gray-500 line-through' : 'text-gray-900'
+                        }`}>
+                          {item.label}
+                        </span>
+                        {item.completed && (
+                          <CheckCircle2 className="text-green-600 shrink-0" size={16} />
+                        )}
+                      </div>
+                      <p className="text-xs text-gray-600">{item.description}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
+        {/* About You Section */}
+        <div className="mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-1.5 h-6 bg-violet-600 rounded-full"></div>
+            <h2 className="text-lg font-bold text-gray-900">About You</h2>
+          </div>
+          <p className="text-xs text-gray-600 mb-4">
+            Help us personalize your experience and provide better insights
+          </p>
+          <div className="space-y-3">
+            {profileFields.map((field) => {
+              const Icon = field.icon;
+              return (
+                <div key={field.id} className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 transition-all">
+                  <div className="flex items-center gap-3">
+                    <div className={`${field.color} rounded-lg p-2 shrink-0`}>
+                      <Icon size={18} strokeWidth={2} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        {field.label}
+                      </label>
+                      <input
+                        type="text"
+                        placeholder={field.placeholder}
+                        defaultValue={field.value}
+                        className="w-full text-sm text-gray-900 placeholder-gray-400 bg-transparent border-none focus:outline-none focus:ring-0 p-0"
+                      />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Suggestions Section */}
         <div>
           <h3 className="text-sm font-semibold text-gray-900 mb-3">Suggestions</h3>
           <div className="space-y-3">
