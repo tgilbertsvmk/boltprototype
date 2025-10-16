@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Send, Plus, Loader2 } from 'lucide-react';
 import { QuestionCard } from './QuestionCard';
 import { EnhancementsPanel } from './EnhancementsPanel';
-import { ProfileIntro } from './ProfileIntro';
 import { Question, Survey, supabase } from '../lib/supabase';
 import { regenerateQuestion } from '../lib/surveyGenerator';
 
@@ -14,10 +13,9 @@ interface SurveyEditorProps {
   initialExpanded?: boolean;
 }
 
-export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, onRegenerateAll }: SurveyEditorProps) {
+export function SurveyEditor({ survey, questions: initialQuestions, onDeploy }: SurveyEditorProps) {
   const [questions, setQuestions] = useState(initialQuestions);
   const [isDeploying, setIsDeploying] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
     setQuestions(initialQuestions);
@@ -64,20 +62,9 @@ export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, on
     setIsDeploying(false);
   };
 
-  const handleGenerateFromIntro = (signals: Record<string, string>) => {
-    setShowIntro(false);
-    onRegenerateAll(signals);
-  };
-
   return (
     <div className="min-h-screen bg-white">
-      {showIntro && (
-        <ProfileIntro
-          signals={survey.personalization_signals}
-          onGenerate={handleGenerateFromIntro}
-        />
-      )}
-      <div className={`max-w-[1400px] mx-auto flex ${showIntro ? 'pt-24' : ''}`}>
+      <div className="max-w-[1400px] mx-auto flex">
         <div className="w-[60%] pl-[10%] pr-8 py-8">
         <div className="mb-10">
           <div className="flex items-center justify-between mb-3">
