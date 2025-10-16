@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { SurveyEditor } from './components/SurveyEditor';
 import { DeployedScreen } from './components/DeployedScreen';
+import { ShaderDemo } from './components/ShaderDemo';
 import { supabase, Survey, Question } from './lib/supabase';
 import { generateSurveyQuestions } from './lib/surveyGenerator';
 
-type AppState = 'editor' | 'deployed';
+type AppState = 'editor' | 'deployed' | 'shader';
 
 function App() {
   const [appState, setAppState] = useState<AppState>('editor');
@@ -152,7 +153,27 @@ function App() {
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-green-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-lg text-gray-600">Creating your personalized survey...</p>
+          <button
+            onClick={() => setAppState('shader')}
+            className="mt-4 text-sm text-blue-600 hover:text-blue-700 underline"
+          >
+            View Shader Demo
+          </button>
         </div>
+      </div>
+    );
+  }
+
+  if (appState === 'shader') {
+    return (
+      <div className="min-h-screen bg-gray-900 p-8">
+        <button
+          onClick={() => setAppState('editor')}
+          className="mb-4 px-4 py-2 bg-white text-gray-900 rounded-lg hover:bg-gray-100 transition-colors"
+        >
+          Back to Survey Editor
+        </button>
+        <ShaderDemo />
       </div>
     );
   }
