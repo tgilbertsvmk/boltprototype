@@ -65,7 +65,7 @@ export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, on
   };
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-white">
       <PersonalizationWidget
         signals={survey.personalization_signals}
         onUpdate={(signals) => {
@@ -78,7 +78,8 @@ export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, on
         onToggle={() => setIsWidgetExpanded(!isWidgetExpanded)}
       />
 
-      <div className="w-[50%] pl-[10%] pr-8 py-8">
+      <div className="max-w-[1400px] mx-auto flex">
+        <div className="w-[60%] pl-[10%] pr-8 py-8">
         <div className="mb-10">
           <div className="flex items-center justify-between mb-3">
             <h1 className="text-4xl font-semibold text-gray-900 tracking-tight">
@@ -122,10 +123,11 @@ export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, on
           <Plus size={16} />
           Add Question
         </button>
-      </div>
+        </div>
 
-      <div className="w-[40%] pr-[10%]">
-        <EnhancementsPanel questionCount={questions.length} />
+        <div className="w-[40%] pr-[10%]">
+          <EnhancementsPanel questionCount={questions.length} />
+        </div>
       </div>
     </div>
   );
