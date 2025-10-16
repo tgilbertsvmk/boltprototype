@@ -65,7 +65,7 @@ export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, on
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white flex">
       <PersonalizationWidget
         signals={survey.personalization_signals}
         onUpdate={(signals) => {
@@ -78,52 +78,54 @@ export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, on
         onToggle={() => setIsWidgetExpanded(!isWidgetExpanded)}
       />
 
-      <EnhancementsPanel questionCount={questions.length} />
-
-      <div className="max-w-5xl mx-auto px-6 py-8 pl-20 pr-20">
-          <div className="mb-10">
-            <div className="flex items-center justify-between mb-3">
-              <h1 className="text-4xl font-semibold text-gray-900 tracking-tight">
-                {survey.personalization_signals.use_case || 'Your Survey'}
-              </h1>
-              <button
-                onClick={handleDeploy}
-                disabled={isDeploying}
-                className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isDeploying ? (
-                  <>
-                    <Loader2 className="animate-spin" size={18} />
-                    <span>Deploying...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send size={18} />
-                    <span>Deploy</span>
-                  </>
-                )}
-              </button>
-            </div>
-            <p className="text-gray-500 text-sm">
-              Review and customize your questions below
-            </p>
+      <div className="w-[60%] px-8 py-8">
+        <div className="mb-10">
+          <div className="flex items-center justify-between mb-3">
+            <h1 className="text-4xl font-semibold text-gray-900 tracking-tight">
+              {survey.personalization_signals.use_case || 'Your Survey'}
+            </h1>
+            <button
+              onClick={handleDeploy}
+              disabled={isDeploying}
+              className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isDeploying ? (
+                <>
+                  <Loader2 className="animate-spin" size={18} />
+                  <span>Deploying...</span>
+                </>
+              ) : (
+                <>
+                  <Send size={18} />
+                  <span>Deploy</span>
+                </>
+              )}
+            </button>
           </div>
+          <p className="text-gray-500 text-sm">
+            Review and customize your questions below
+          </p>
+        </div>
 
-          <div className="space-y-3">
-            {questions.map((question) => (
-              <QuestionCard
-                key={question.id}
-                question={question}
-                onUpdate={handleUpdateQuestion}
-                onRegenerate={handleRegenerateQuestion}
-              />
-            ))}
-          </div>
+        <div className="space-y-3">
+          {questions.map((question) => (
+            <QuestionCard
+              key={question.id}
+              question={question}
+              onUpdate={handleUpdateQuestion}
+              onRegenerate={handleRegenerateQuestion}
+            />
+          ))}
+        </div>
 
-          <button className="mt-4 w-full border border-gray-200 rounded-lg py-4 text-gray-400 hover:border-gray-300 hover:text-gray-500 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 font-medium text-sm">
-            <Plus size={16} />
-            Add Question
-          </button>
+        <button className="mt-4 w-full border border-gray-200 rounded-lg py-4 text-gray-400 hover:border-gray-300 hover:text-gray-500 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 font-medium text-sm">
+          <Plus size={16} />
+          Add Question
+        </button>
+      </div>
+
+      <div className="w-[40%]">
+        <EnhancementsPanel questionCount={questions.length} />
       </div>
     </div>
   );

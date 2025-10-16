@@ -10,8 +10,8 @@ export function EnhancementsPanel({ questionCount }: EnhancementsPanelProps) {
   const contentScore = 82;
 
   return (
-    <div className="fixed right-0 top-0 h-full bg-white border-l border-gray-200 shadow-xl w-80 z-50">
-      <div className="h-full flex flex-col p-5 overflow-y-auto">
+    <div className="h-full bg-gray-50 border-l border-gray-200">
+      <div className="h-full flex flex-col p-8 overflow-y-auto">
         <div className="flex items-center gap-2 mb-6">
           <BarChart3 className="text-blue-600" size={20} />
           <h2 className="text-lg font-semibold text-gray-900">Enhancements</h2>
