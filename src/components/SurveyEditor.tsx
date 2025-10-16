@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Send, Plus, Loader2 } from 'lucide-react';
 import { QuestionCard } from './QuestionCard';
-import { PersonalizationWidget } from './PersonalizationWidget';
 import { EnhancementsPanel } from './EnhancementsPanel';
 import { Question, Survey, supabase } from '../lib/supabase';
 import { regenerateQuestion } from '../lib/surveyGenerator';
@@ -14,9 +13,8 @@ interface SurveyEditorProps {
   initialExpanded?: boolean;
 }
 
-export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, onRegenerateAll, initialExpanded = false }: SurveyEditorProps) {
+export function SurveyEditor({ survey, questions: initialQuestions, onDeploy }: SurveyEditorProps) {
   const [questions, setQuestions] = useState(initialQuestions);
-  const [isWidgetExpanded, setIsWidgetExpanded] = useState(initialExpanded);
   const [isDeploying, setIsDeploying] = useState(false);
 
   useEffect(() => {
@@ -66,18 +64,6 @@ export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, on
 
   return (
     <div className="min-h-screen bg-white">
-      <PersonalizationWidget
-        signals={survey.personalization_signals}
-        onUpdate={(signals) => {
-          onRegenerateAll(signals);
-        }}
-        onGenerate={() => {
-          setIsWidgetExpanded(false);
-        }}
-        isExpanded={isWidgetExpanded}
-        onToggle={() => setIsWidgetExpanded(!isWidgetExpanded)}
-      />
-
       <div className="max-w-[1400px] mx-auto flex">
         <div className="w-[60%] pl-[10%] pr-8 py-8">
         <div className="mb-10">
