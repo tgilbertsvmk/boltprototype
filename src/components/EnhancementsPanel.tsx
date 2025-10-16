@@ -85,7 +85,11 @@ export function EnhancementsPanel({ questionCount }: EnhancementsPanelProps) {
             {suggestions.map((suggestion) => (
               <div
                 key={suggestion.id}
-                className="bg-gradient-to-br from-amber-50 to-orange-50 border border-orange-200 rounded-lg p-4 relative"
+                className={`${
+                  suggestion.isPremium
+                    ? 'bg-gradient-to-br from-amber-50 to-orange-50 border-orange-200'
+                    : 'bg-white border-gray-200'
+                } border rounded-lg p-4 relative`}
               >
                 {suggestion.isPremium && (
                   <div className="absolute top-3 right-3">
@@ -118,7 +122,13 @@ export function EnhancementsPanel({ questionCount }: EnhancementsPanelProps) {
                       </div>
                     )}
                   </div>
-                  <button className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-orange-300 rounded-md text-xs font-medium text-gray-900 hover:bg-orange-50 transition-colors ml-auto">
+                  <button
+                    className={`flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-md text-xs font-medium text-gray-900 transition-colors ml-auto ${
+                      suggestion.isPremium
+                        ? 'border border-orange-300 hover:bg-orange-50'
+                        : 'border border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
                     <Wand2 size={13} />
                     Do this for me
                   </button>
