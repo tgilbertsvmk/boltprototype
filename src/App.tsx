@@ -184,7 +184,6 @@ function App() {
           onDeploy={deploySurvey}
           onRegenerateAll={regenerateSurvey}
           onOpenProfiler={() => setShowProfilerModal(true)}
-          initialExpanded={true}
         />
         {showProfilerModal && (
           <ProfilerFlow
