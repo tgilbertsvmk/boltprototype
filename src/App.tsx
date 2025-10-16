@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { ProfilerFlow } from './components/ProfilerFlow';
 import { SurveyEditor } from './components/SurveyEditor';
 import { DeployedScreen } from './components/DeployedScreen';
 import { supabase, Survey, Question } from './lib/supabase';
 import { generateSurveyQuestions } from './lib/surveyGenerator';
 
-type AppState = 'profiler' | 'editor' | 'deployed';
+type AppState = 'editor' | 'deployed';
 
 function App() {
   const [appState, setAppState] = useState<AppState>('editor');
