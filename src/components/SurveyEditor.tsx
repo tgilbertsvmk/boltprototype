@@ -11,10 +11,11 @@ interface SurveyEditorProps {
   questions: Question[];
   onDeploy: () => void;
   onRegenerateAll: (signals: Record<string, string>) => void;
+  onOpenProfiler: () => void;
   initialExpanded?: boolean;
 }
 
-export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, onRegenerateAll, initialExpanded = false }: SurveyEditorProps) {
+export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, onRegenerateAll, onOpenProfiler, initialExpanded = false }: SurveyEditorProps) {
   const [questions, setQuestions] = useState(initialQuestions);
   const [isWidgetExpanded, setIsWidgetExpanded] = useState(initialExpanded);
   const [isDeploying, setIsDeploying] = useState(false);
@@ -74,6 +75,7 @@ export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, on
         onGenerate={() => {
           setIsWidgetExpanded(false);
         }}
+        onOpenProfiler={onOpenProfiler}
         isExpanded={isWidgetExpanded}
         onToggle={() => setIsWidgetExpanded(!isWidgetExpanded)}
       />

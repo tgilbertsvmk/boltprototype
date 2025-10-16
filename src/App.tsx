@@ -12,6 +12,7 @@ function App() {
   const [currentSurvey, setCurrentSurvey] = useState<Survey | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [showProfilerModal, setShowProfilerModal] = useState(false);
 
   useEffect(() => {
     const initializeSurvey = async () => {
@@ -158,15 +159,40 @@ function App() {
     );
   }
 
+  const handleProfilerComplete = async (data: {
+    industry: string;
+    useCase: string;
+    role: string;
+    teamType: string;
+  }) => {
+    setShowProfilerModal(false);
+    const signals = {
+      industry: data.industry,
+      use_case: data.useCase,
+      role: data.role,
+      team_type: data.teamType,
+    };
+    await regenerateSurvey(signals);
+  };
+
   if (appState === 'editor' && currentSurvey && questions.length > 0) {
     return (
-      <SurveyEditor
-        survey={currentSurvey}
-        questions={questions}
-        onDeploy={deploySurvey}
-        onRegenerateAll={regenerateSurvey}
-        initialExpanded={true}
-      />
+      <>
+        <SurveyEditor
+          survey={currentSurvey}
+          questions={questions}
+          onDeploy={deploySurvey}
+          onRegenerateAll={regenerateSurvey}
+          onOpenProfiler={() => setShowProfilerModal(true)}
+          initialExpanded={true}
+        />
+        {showProfilerModal && (
+          <ProfilerFlow
+            onComplete={handleProfilerComplete}
+            onDismiss={() => setShowProfilerModal(false)}
+          />
+        )}
+      </>
     );
   }
 
