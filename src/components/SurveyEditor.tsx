@@ -78,7 +78,7 @@ export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, on
         onToggle={() => setIsWidgetExpanded(!isWidgetExpanded)}
       />
 
-      <div className="w-[60%] px-8 py-8">
+      <div className="w-[50%] pl-[10%] pr-8 py-8">
         <div className="mb-10">
           <div className="flex items-center justify-between mb-3">
             <h1 className="text-4xl font-semibold text-gray-900 tracking-tight">
@@ -124,7 +124,7 @@ export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, on
         </button>
       </div>
 
-      <div className="w-[40%]">
+      <div className="w-[40%] pr-[10%]">
         <EnhancementsPanel questionCount={questions.length} />
       </div>
     </div>
