@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, Pencil } from 'lucide-react';
+import { Pencil } from 'lucide-react';
 
 interface ProfileIntroProps {
   signals: Record<string, string>;
@@ -43,8 +43,6 @@ export function ProfileIntro({ signals, onGenerate }: ProfileIntroProps) {
 
   const handleGenerate = () => {
     if (hasChanges) {
-      // Parse the edited text back into signals (simple parsing)
-      // For now, keep the original signals structure but could be enhanced
       onGenerate(signals);
     } else {
       onGenerate(signals);
@@ -52,19 +50,22 @@ export function ProfileIntro({ signals, onGenerate }: ProfileIntroProps) {
   };
 
   return (
-    <div className="bg-gradient-to-br from-green-50 to-white border-b border-gray-200">
-      <div className="max-w-[1400px] mx-auto px-[10%] py-12">
-        <div className="max-w-3xl">
-          <div className="mb-6">
+    <div className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm z-40">
+      <div className="max-w-[1400px] mx-auto px-[10%] py-4">
+        <div className="flex items-center justify-between gap-6">
+          <div className="flex-1">
+            <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">
+              We've prepared a personalized survey based on your profile
+            </p>
             {!isEditing ? (
               <button
                 onClick={handleTextClick}
-                className="text-left group w-full"
+                className="text-left group"
               >
-                <p className="text-3xl font-medium text-gray-900 leading-relaxed group-hover:text-gray-700 transition-colors">
+                <p className="text-lg text-gray-900 group-hover:text-gray-600 transition-colors">
                   {currentSentence}
-                  <span className="inline-flex items-center ml-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Pencil size={20} className="text-gray-400" />
+                  <span className="inline-flex items-center ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Pencil size={14} className="text-gray-400" />
                   </span>
                 </p>
               </button>
@@ -75,29 +76,18 @@ export function ProfileIntro({ signals, onGenerate }: ProfileIntroProps) {
                   onChange={handleTextChange}
                   onBlur={handleBlur}
                   autoFocus
-                  className="w-full text-3xl font-medium text-gray-900 leading-relaxed bg-white border-2 border-green-500 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
-                  rows={3}
+                  className="w-full text-lg text-gray-900 bg-white border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  rows={2}
                 />
               </div>
             )}
           </div>
 
-          <p className="text-gray-600 mb-8 text-lg">
-            We've prepared a personalized survey based on your profile. Review and customize the questions below, then deploy when ready.
-          </p>
-
           <button
             onClick={handleGenerate}
-            className="inline-flex items-center gap-2 bg-green-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl"
+            className="flex-shrink-0 bg-blue-600 text-white px-5 py-2 rounded-lg font-medium text-sm hover:bg-blue-700 transition-colors"
           >
-            {hasChanges ? (
-              <>
-                <Check size={22} />
-                <span>Generate Modified Survey</span>
-              </>
-            ) : (
-              <span>Review Survey</span>
-            )}
+            {hasChanges ? 'Generate Modified Survey' : 'Review Survey'}
           </button>
         </div>
       </div>

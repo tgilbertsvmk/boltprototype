@@ -77,7 +77,7 @@ export function SurveyEditor({ survey, questions: initialQuestions, onDeploy, on
           onGenerate={handleGenerateFromIntro}
         />
       )}
-      <div className="max-w-[1400px] mx-auto flex">
+      <div className={`max-w-[1400px] mx-auto flex ${showIntro ? 'pt-24' : ''}`}>
         <div className="w-[60%] pl-[10%] pr-8 py-8">
         <div className="mb-10">
           <div className="flex items-center justify-between mb-3">
