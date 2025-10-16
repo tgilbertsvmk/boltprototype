@@ -55,10 +55,11 @@ export function PersonalizationWidget({
       {!isExpanded ? (
         <button
           onClick={onToggle}
-          className="absolute top-8 left-3.5 w-7 h-7 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute top-8 left-3.5 w-7 h-7 flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-gray-600 transition-colors"
           aria-label="Expand personalization panel"
         >
-          <ChevronRight size={20} />
+          <Sparkles size={14} />
+          <ChevronRight size={14} />
         </button>
       ) : (
         <div className="h-full flex flex-col p-5">

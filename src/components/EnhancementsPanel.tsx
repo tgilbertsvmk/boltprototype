@@ -27,10 +27,11 @@ export function EnhancementsPanel({ isExpanded, onToggle, questionCount }: Enhan
         {!isExpanded ? (
           <button
             onClick={onToggle}
-            className="absolute top-8 right-3.5 w-7 h-7 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors"
+            className="absolute top-8 right-3.5 w-7 h-7 flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-gray-600 transition-colors"
             aria-label="Expand enhancements panel"
           >
-            <ChevronLeft size={20} />
+            <BarChart3 size={14} />
+            <ChevronLeft size={14} />
           </button>
         ) : (
           <div className="h-full flex flex-col p-5 overflow-y-auto">
