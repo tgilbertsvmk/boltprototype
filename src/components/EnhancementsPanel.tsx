@@ -18,9 +18,8 @@ export function EnhancementsPanel({ questionCount }: EnhancementsPanelProps) {
 
   const checklistItems = [
     { id: 1, label: 'Add a question', completed: questionCount > 0 },
-    { id: 2, label: 'Make the language simpler', completed: false },
-    { id: 3, label: 'Set up your survey audience', completed: false },
-    { id: 4, label: 'Take a test survey', completed: false },
+    { id: 2, label: 'Set up your survey audience', completed: false },
+    { id: 3, label: 'Take a test survey', completed: false },
   ];
 
   const suggestions: Suggestion[] = [
